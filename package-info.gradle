@@ -1,0 +1,56 @@
+import java.nio.file.Files
+
+for (def sourceSet in [sourceSets.main, sourceSets.client]) {
+	def sourceSetName = sourceSet.name
+	def taskName = sourceSet.getTaskName('generate', 'PackageInfos')
+	def task = tasks.register(taskName, GeneratePackageInfos) {
+		group = 'fabric'
+		description = "Generates package-info files for $sourceSetName packages."
+		sourceRoot = file("src/$sourceSetName/java")
+		outputDir = file("src/generated/$sourceSetName")
+	}
+	sourceSet.java.srcDir task
+
+	def cleanTask = tasks.register(sourceSet.getTaskName('clean', 'PackageInfos'), Delete) {
+		group = 'fabric'
+		delete file("src/generated/$sourceSetName")
+	}
+	clean.dependsOn cleanTask
+}
+
+abstract class GeneratePackageInfos extends DefaultTask {
+	@SkipWhenEmpty
+	@InputDirectory
+	final DirectoryProperty sourceRoot = project.objects.directoryProperty()
+
+	@OutputDirectory
+	final DirectoryProperty outputDir = project.objects.directoryProperty()
+
+    @TaskAction
+    def run() {
+		def output = outputDir.get().asFile.toPath()
+		output.deleteDir()
+		def root = sourceRoot.get().asFile.toPath()
+
+		root.eachDirRecurse {
+			def containsJava = Files.list(it).any {
+				Files.isRegularFile(it) && it.fileName.toString().endsWith('.java')
+			}
+
+			if (!containsJava) return
+			if (Files.exists(it.resolve('package-info.java'))) return
+
+			def relativePath = root.relativize(it)
+			def target = output.resolve(relativePath)
+			Files.createDirectories(target)
+
+			def packageName = relativePath.toString().replace(File.separator, '.')
+
+			target.resolve('package-info.java').withWriter {
+				it.write("""@org.jspecify.annotations.NullMarked
+package $packageName;
+""")
+			}
+		}
+	}
+}

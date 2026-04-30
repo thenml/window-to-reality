@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "window-to-reality",
+	"version": "${version}",
+	"name": "Window To Reality",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"nml"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "Apache-2.0",
+	"icon": "assets/window-to-reality/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.nml.windowtoreality.WindowToReality"
+		],
+		"client": [
+			"net.nml.windowtoreality.client.WindowToRealityClient"
+		]
+	},
+	"mixins": [
+		"window-to-reality.mixins.json",
+		{
+			"config": "window-to-reality.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.2",
+		"minecraft": "~26.2-",
+		"java": ">=25"
+	}
+}
