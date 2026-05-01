@@ -5,7 +5,10 @@
 	"client": [
 		"GameRendererMixin",
 		"WindowMixin",
-		"VulkanGpuSurfaceMixin"
+		"VulkanGpuSurfaceMixin",
+		"BlockEntityRenderersMixin",
+		"RenderPipelinesAccessor",
+		"RenderTypeAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1
