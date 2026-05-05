@@ -3,12 +3,14 @@
 	"package": "net.nml.windowtoreality.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
-		"GameRendererMixin",
 		"WindowMixin",
 		"VulkanGpuSurfaceMixin",
 		"BlockEntityRenderersMixin",
 		"RenderPipelinesAccessor",
-		"RenderTypeAccessor"
+		"RenderTypeAccessor",
+		"LevelRendererMixin",
+		"FogRendererMixin",
+		"RenderPipelinesMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

@@ -1,4 +1,4 @@
-package net.nml.windowtoreality.renderer;
+package net.nml.windowtoreality.client.renderer;
 
 import java.util.List;
 import java.util.Map;
@@ -17,12 +17,11 @@ import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Util;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 import net.nml.windowtoreality.block.CutoutBlockEntity;
 import net.nml.windowtoreality.client.WindowToRealityClient;
 
-@SuppressWarnings("null") // todo: remove
+@SuppressWarnings("null")
 public class CutoutBlockEntityRenderer implements BlockEntityRenderer<CutoutBlockEntity, EndPortalRenderState> {
 	private static final Vector3fc FROM = new Vector3f(0.0F, 0.0F, 0.0F);
 	private static final Vector3fc TO = new Vector3f(1.0F, 1.0F, 1.0F);
@@ -53,7 +52,7 @@ public class CutoutBlockEntityRenderer implements BlockEntityRenderer<CutoutBloc
 		state.facesToShow.clear();
 
 		for (Direction direction : Direction.values()) {
-			if (Block.shouldRenderFace(blockEntity.getBlockState(), blockEntity.getLevel().getBlockState(blockEntity.getBlockPos().relative(direction)), direction)) {
+			if (blockEntity.shouldRenderFace(direction)) {
 				state.facesToShow.add(direction);
 			}
 		}

@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.nml.windowtoreality.WindowToReality;
-import net.nml.windowtoreality.renderer.CutoutBlockEntityRenderer;
+import net.nml.windowtoreality.client.renderer.CutoutBlockEntityRenderer;
 
 @Mixin(BlockEntityRenderers.class)
 public abstract class BlockEntityRenderersMixin {

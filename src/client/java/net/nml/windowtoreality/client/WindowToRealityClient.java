@@ -15,17 +15,21 @@ import net.nml.windowtoreality.client.mixin.RenderTypeAccessor;
 
 public class WindowToRealityClient implements ClientModInitializer {
 	public static final RenderType cutoutRenderType = RenderTypeAccessor.create("window_to_reality_cutout", RenderSetup.builder(RenderPipelinesAccessor.register(
-		RenderPipeline.builder(RenderPipeline.builder()
+		RenderPipeline.builder()
 			.withVertexFormat(DefaultVertexFormat.POSITION, VertexFormat.Mode.QUADS)
 			.withBindGroupLayout(BindGroupLayouts.MATRICES_PROJECTION)
 			.withBindGroupLayout(BindGroupLayouts.GLOBALS)
 			.withVertexShader(WindowToReality.of("cutout"))
 			.withFragmentShader(WindowToReality.of("cutout"))
 			.withDepthStencilState(DepthStencilState.DEFAULT)
-			.buildSnippet()
-		).withLocation(WindowToReality.of("cutout")).build())).createRenderSetup());
+			.withLocation(WindowToReality.of("cutout"))
+			.build()
+		)).createRenderSetup());
 
 	@Override
 	public void onInitializeClient() {
+		if (WindowToReality.CLEAR_SKY) {
+			WindowToReality.LOGGER.info("WTR_CLEAR_SKY flag is set, enjoy the clear sky");
+		}
 	}
 }
