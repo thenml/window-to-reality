@@ -19,7 +19,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.Util;
 import net.minecraft.world.phys.Vec3;
 import net.nml.windowtoreality.block.CutoutBlockEntity;
-import net.nml.windowtoreality.client.WindowToRealityClient;
+import net.nml.windowtoreality.client.ClientRegistry;
 
 @SuppressWarnings("null")
 public class CutoutBlockEntityRenderer implements BlockEntityRenderer<CutoutBlockEntity, EndPortalRenderState> {
@@ -61,7 +61,7 @@ public class CutoutBlockEntityRenderer implements BlockEntityRenderer<CutoutBloc
 	@Override
 	public void submit(@Nullable EndPortalRenderState state, PoseStack matrices, SubmitNodeCollector queue, CameraRenderState cameraState) {
 		matrices.pushPose();
-		queue.submitCustomGeometry(matrices, WindowToRealityClient.cutoutRenderType, (pose, buffer) -> {
+		queue.submitCustomGeometry(matrices, ClientRegistry.cutoutRenderType, (pose, buffer) -> {
 			for (Direction direction : state.facesToShow) {
 				for (Vector3fc faceVertex : FACES.get(direction)) {
 					buffer.addVertex(pose, faceVertex);

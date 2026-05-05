@@ -6,12 +6,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.nml.windowtoreality.WindowToReality;
+import net.nml.windowtoreality.ModRegistry;
 import net.nml.windowtoreality.client.renderer.CutoutBlockEntityRenderer;
 
 @Mixin(BlockEntityRenderers.class)
@@ -20,6 +21,8 @@ public abstract class BlockEntityRenderersMixin {
 
 	@Inject(method = "<clinit>", at = @At("RETURN"))
 	private static void reg(CallbackInfo ci) {
-		register(WindowToReality.cutoutBlockEntity, CutoutBlockEntityRenderer::new);
+		if (FabricLoader.getInstance().isModLoaded("fabric-api")) {
+			register(ModRegistry.cutoutBlockEntity, CutoutBlockEntityRenderer::new);
+		}
 	}
 }

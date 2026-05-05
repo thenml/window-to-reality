@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.nml.windowtoreality.WindowToReality;
+import net.nml.windowtoreality.ModRegistry;
 
 public class CutoutBlockEntity extends BlockEntity {
 	protected CutoutBlockEntity(final BlockEntityType<?> type, final BlockPos worldPosition, final BlockState blockState) {
@@ -14,7 +14,7 @@ public class CutoutBlockEntity extends BlockEntity {
 	}
 
 	public CutoutBlockEntity(BlockPos worldPosition, BlockState blockState) {
-		super(WindowToReality.cutoutBlockEntity, worldPosition, blockState);
+		super(ModRegistry.cutoutBlockEntity, worldPosition, blockState);
 	}
 
 	public boolean shouldRenderFace(Direction direction) {

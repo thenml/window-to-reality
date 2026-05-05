@@ -89,9 +89,11 @@ void main() {
     vec4 color = (UseRgss == 1 ? sampleRGSS(Sampler0, texCoord0, 1.0f / TextureSize) : sampleNearest(Sampler0, texCoord0, 1.0f / TextureSize)) * vertexColor;
     color = mix(FogColor * vec4(1, 1, 1, color.a), color, ChunkVisibility);
 #ifdef ALPHA_CUTOUT
-    if (color.a < ALPHA_CUTOUT * 1.5) {
+    if (color.a < ALPHA_CUTOUT) {
         discard;
-    }
+    } else if (ALPHA_CUTOUT == 0.5f) {
+		color.a = 1.0f;
+	}
 #endif
     fragColor = apply_fog(color, sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogEnvironmentalEnd, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
 }

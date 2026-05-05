@@ -1,35 +1,14 @@
 package net.nml.windowtoreality.client;
 
-import com.mojang.blaze3d.pipeline.DepthStencilState;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat;
-
 import net.fabricmc.api.ClientModInitializer;
-import net.minecraft.client.renderer.BindGroupLayouts;
-import net.minecraft.client.renderer.rendertype.RenderSetup;
-import net.minecraft.client.renderer.rendertype.RenderType;
-import net.nml.windowtoreality.WindowToReality;
-import net.nml.windowtoreality.client.mixin.RenderPipelinesAccessor;
-import net.nml.windowtoreality.client.mixin.RenderTypeAccessor;
+import net.fabricmc.loader.api.FabricLoader;
 
 public class WindowToRealityClient implements ClientModInitializer {
-	public static final RenderType cutoutRenderType = RenderTypeAccessor.create("window_to_reality_cutout", RenderSetup.builder(RenderPipelinesAccessor.register(
-		RenderPipeline.builder()
-			.withVertexFormat(DefaultVertexFormat.POSITION, VertexFormat.Mode.QUADS)
-			.withBindGroupLayout(BindGroupLayouts.MATRICES_PROJECTION)
-			.withBindGroupLayout(BindGroupLayouts.GLOBALS)
-			.withVertexShader(WindowToReality.of("cutout"))
-			.withFragmentShader(WindowToReality.of("cutout"))
-			.withDepthStencilState(DepthStencilState.DEFAULT)
-			.withLocation(WindowToReality.of("cutout"))
-			.build()
-		)).createRenderSetup());
-
+	public static boolean CLEAR_SKY = false;
 	@Override
 	public void onInitializeClient() {
-		if (WindowToReality.CLEAR_SKY) {
-			WindowToReality.LOGGER.info("WTR_CLEAR_SKY flag is set, enjoy the clear sky");
+		if (FabricLoader.getInstance().isModLoaded("fabric-api")) {
+			ClientRegistry.init();
 		}
 	}
 }

@@ -10,7 +10,7 @@
 		"RenderTypeAccessor",
 		"LevelRendererMixin",
 		"FogRendererMixin",
-		"RenderPipelinesMixin"
+		"ScreenshotMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

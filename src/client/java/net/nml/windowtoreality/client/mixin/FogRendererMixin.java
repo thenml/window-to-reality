@@ -6,13 +6,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import net.minecraft.client.renderer.fog.FogRenderer;
-import net.nml.windowtoreality.WindowToReality;
+import net.nml.windowtoreality.client.WindowToRealityClient;
 
 @Mixin(FogRenderer.class)
 public abstract class FogRendererMixin {
 	@Redirect(method = "computeFogColor(Lnet/minecraft/client/Camera;FLnet/minecraft/client/multiplayer/ClientLevel;IFLorg/joml/Vector4f;)V", at = @At(value = "INVOKE", target = "Lorg/joml/Vector4f;set(FFFF)Lorg/joml/Vector4f;"))
 	private static Vector4f modifyFogColor(Vector4f dest, float r, float g, float b, float a) {
-		if (WindowToReality.CLEAR_SKY) {
+		if (WindowToRealityClient.CLEAR_SKY) {
 			return dest.set(0.0f);
 		}
 		return dest.set(r, g, b, a);
