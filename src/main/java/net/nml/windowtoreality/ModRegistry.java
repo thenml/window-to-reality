@@ -22,11 +22,11 @@ import net.nml.windowtoreality.block.CutoutBlockEntity;
 
 @SuppressWarnings("null")
 public class ModRegistry {
-	public static final Block cutoutBlock = block("cutout", CutoutBlock::new, cutoutProperties());
+	public static final Block cutoutBlock = block("cutout_block", CutoutBlock::new, cutoutProperties());
 	public static final Block cutoutBarrier = block("cutout_barrier", CutoutBlock::new, cutoutProperties().strength(-1.0F, 3600000.8F));
 	public static final Block cutoutWindow = block("cutout_window", CutoutBlock::new, cutoutProperties().noCollision());
-	public static final Block cutoutPortal = block("cutout_portal", CutoutBlock::new, cutoutProperties().strength(-1.0F, 3600000.8F).noCollision());
-	public static final BlockEntityType<CutoutBlockEntity> cutoutBlockEntity = blockEntityType("cutout_block", CutoutBlockEntity::new, Set.of(cutoutBlock, cutoutBarrier, cutoutWindow, cutoutPortal));
+	public static final Block cutoutVoid = block("cutout_void", CutoutBlock::new, cutoutProperties().strength(-1.0F, 3600000.8F).noCollision());
+	public static final BlockEntityType<CutoutBlockEntity> cutoutBlockEntity = blockEntityType("cutout_block", CutoutBlockEntity::new, Set.of(cutoutBlock, cutoutBarrier, cutoutWindow, cutoutVoid));
 	
 	static BlockBehaviour.Properties cutoutProperties() {
 		return BlockBehaviour.Properties.of()
@@ -71,7 +71,7 @@ public class ModRegistry {
 			output.accept(cutoutBlock);
 			output.accept(cutoutBarrier);
 			output.accept(cutoutWindow);
-			output.accept(cutoutPortal);
+			output.accept(cutoutVoid);
 		});
 	}
 }

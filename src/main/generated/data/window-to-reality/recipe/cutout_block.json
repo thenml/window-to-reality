@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "O": "minecraft:ender_eye",
+    "X": "minecraft:glass"
+  },
+  "pattern": [
+    " X ",
+    "XOX",
+    " X "
+  ],
+  "result": {
+    "count": 4,
+    "id": "window-to-reality:cutout_block"
+  }
+}

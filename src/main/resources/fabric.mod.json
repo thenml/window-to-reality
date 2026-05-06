@@ -20,6 +20,9 @@
 		],
 		"client": [
 			"net.nml.windowtoreality.client.WindowToRealityClient"
+		],
+		"fabric-datagen": [
+			"net.nml.windowtoreality.datagen.WindowToRealityDatagen"
 		]
 	},
 	"mixins": [

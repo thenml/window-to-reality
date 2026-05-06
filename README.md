@@ -2,7 +2,7 @@
 
 Simple no-dependency* mod to modify the Minecraft window to allow transparency. Made for video creators and map makers.
 
-(Fabric API needed for additional features)
+(*Fabric API needed for content features)
 
 ## Features
 
@@ -11,7 +11,7 @@ Simple no-dependency* mod to modify the Minecraft window to allow transparency. 
   - `cutout` - breakable, solid
   - `cutout_barrier` - unbreakable, solid
   - `cutout_window` - breakable, passthrough
-  - `cutout_portal` - unbreakable, passthrough
+  - `cutout_void` - unbreakable, passthrough
 - Clear Sky builtin texturepack (with FAPI):
   - Enables transparent sky rendering by modifying the sky shader and removing fog.
 
@@ -21,7 +21,7 @@ Simple no-dependency* mod to modify the Minecraft window to allow transparency. 
 - Active updates are primarily done for the latest version.
 - Older versions may receive updates if requested or contributed through community pull requests.
 
-No additional content features are currently planned.
+No additional content features are currently planned. NeoForge support not planned.
 
 ## Compatibility
 
