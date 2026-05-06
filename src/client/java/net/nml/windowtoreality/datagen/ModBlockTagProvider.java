@@ -25,5 +25,10 @@ public class ModBlockTagProvider extends FabricTagsProvider.BlockTagsProvider {
 		builder(BlockTags.MINEABLE_WITH_PICKAXE)
 			.add(key(ModRegistry.cutoutBlock))
 			.add(key(ModRegistry.cutoutWindow));
+		builder(ModRegistry.cutoutBlocksTag)
+			.add(key(ModRegistry.cutoutBlock))
+			.add(key(ModRegistry.cutoutBarrier))
+			.add(key(ModRegistry.cutoutWindow))
+			.add(key(ModRegistry.cutoutVoid));
 	}
 }

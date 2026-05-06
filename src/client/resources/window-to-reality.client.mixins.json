@@ -5,8 +5,6 @@
 	"client": [
 		"WindowMixin",
 		"VulkanGpuSurfaceMixin",
-		"RenderPipelinesAccessor",
-		"RenderTypeAccessor",
 		"LevelRendererMixin",
 		"FogRendererMixin",
 		"ScreenshotMixin"

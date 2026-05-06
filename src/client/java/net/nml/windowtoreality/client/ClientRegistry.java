@@ -10,7 +10,7 @@ import com.mojang.blaze3d.vertex.VertexFormat;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.renderer.BindGroupLayouts;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.network.chat.Component;
@@ -19,16 +19,11 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.nml.windowtoreality.WindowToReality;
-import net.nml.windowtoreality.client.mixin.RenderPipelinesAccessor;
-import net.nml.windowtoreality.client.mixin.RenderTypeAccessor;
 
 public class ClientRegistry {
-
-	public static final RenderType cutoutRenderType = RenderTypeAccessor.create("window_to_reality_cutout", RenderSetup.builder(RenderPipelinesAccessor.register(
-		RenderPipeline.builder()
+	public static final RenderType cutoutRenderType = RenderType.create("window_to_reality_cutout", RenderSetup.builder(RenderPipelines.register(
+		RenderPipeline.builder(RenderPipelines.MATRICES_FOG_SNIPPET)
 			.withVertexFormat(DefaultVertexFormat.POSITION, VertexFormat.Mode.QUADS)
-			.withBindGroupLayout(BindGroupLayouts.MATRICES_PROJECTION)
-			.withBindGroupLayout(BindGroupLayouts.GLOBALS)
 			.withVertexShader(WindowToReality.of("cutout"))
 			.withFragmentShader(WindowToReality.of("cutout"))
 			.withDepthStencilState(DepthStencilState.DEFAULT)

@@ -11,7 +11,7 @@ import com.mojang.blaze3d.systems.GpuBackend;
 
 @Mixin(Window.class)
 public class WindowMixin {
-    @Inject(method = "createGlfwWindow", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwWindowHint(II)V", shift = At.Shift.AFTER))
+    @Inject(method = "createGlfwWindow", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwCreateWindow(IILjava/lang/CharSequence;JJ)J"))
     private static void enableTransparency(int width, int height, String title, long monitor, GpuBackend backend, CallbackInfoReturnable<Long> cir) {
         GLFW.glfwWindowHint(GLFW.GLFW_TRANSPARENT_FRAMEBUFFER, 1);
     }

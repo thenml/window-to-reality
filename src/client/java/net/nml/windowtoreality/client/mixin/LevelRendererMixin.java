@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.LevelRenderer;
 
 @Mixin(LevelRenderer.class)
 public abstract class LevelRendererMixin {
-	@ModifyArg(method = "lambda$render$0", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/ARGB;colorFromFloat(FFFF)I"), index = 0)
+	@ModifyArg(method = {"lambda$render$0" /* 26.2 */, "lambda$renderLevel$0" }, at = @At(value = "INVOKE", target = "Lnet/minecraft/util/ARGB;colorFromFloat(FFFF)I"), index = 0)
 	private static float addOpacity(float original, @Local Vector4f fogColor) {
 		return fogColor.w;
 	}

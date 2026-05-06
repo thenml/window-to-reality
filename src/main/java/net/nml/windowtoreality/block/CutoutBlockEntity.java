@@ -20,6 +20,6 @@ public class CutoutBlockEntity extends BlockEntity {
 	public boolean shouldRenderFace(Direction direction) {
 		if (this.level == null) return false;
 		BlockState other = this.level.getBlockState(this.getBlockPos().relative(direction));
-		return Block.shouldRenderFace(this.getBlockState(), other, direction) && !other.is(this.getBlockState().getBlock());
+		return Block.shouldRenderFace(this.getBlockState(), other, direction) && !other.is(ModRegistry.cutoutBlocksTag);
 	}
 }
