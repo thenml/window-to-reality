@@ -51,7 +51,7 @@ public class ClientRegistry {
 				if (preparations == null) {
 					preparations = false;
 				}
-				WindowToRealityClient.CLEAR_SKY = preparations;
+				WindowToReality.CLEAR_SKY = preparations;
 			}
 		});
 	}

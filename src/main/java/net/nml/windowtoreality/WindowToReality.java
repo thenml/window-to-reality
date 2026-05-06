@@ -16,6 +16,13 @@ public class WindowToReality implements ModInitializer {
 		return Identifier.fromNamespaceAndPath(MOD_ID, name);
 	}
 
+	public static boolean CLEAR_SKY = booleanProperty("WTR_CLEAR_SKY");
+
+	private static boolean booleanProperty(final String name) {
+		String value = System.getProperty(name);
+		return value != null && (value.isEmpty() || Boolean.parseBoolean(value));
+	}
+
 	@Override
 	public void onInitialize() {
 		if (FabricLoader.getInstance().isModLoaded("fabric-api")) {

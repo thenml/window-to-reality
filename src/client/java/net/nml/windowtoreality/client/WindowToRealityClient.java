@@ -7,7 +7,6 @@ import net.nml.windowtoreality.ModRegistry;
 import net.nml.windowtoreality.client.renderer.CutoutBlockEntityRenderer;
 
 public class WindowToRealityClient implements ClientModInitializer {
-	public static boolean CLEAR_SKY = false;
 	@Override
 	public void onInitializeClient() {
 		if (FabricLoader.getInstance().isModLoaded("fabric-api")) {

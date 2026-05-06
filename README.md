@@ -1,18 +1,18 @@
 # window-to-reality
 
-Simple no-dependency* mod to modify the Minecraft window to allow transparency. Made for video creators and map makers.
+Simple mod to modify the Minecraft window to allow transparency. Made for video creators and map makers.
 
-(*Fabric API needed for content features)
+Technically Fabric API is optional, but there are still bugs so I wouldn't recommend removing it yet.
 
 ## Features
 
 - Makes the Minecraft game window support transparency.
-- Adds four utility blocks with different breakable/passthrough combinations (with FAPI):
+- Adds four utility blocks with different breakable/passthrough combinations:
   - `cutout` - breakable, solid
   - `cutout_barrier` - unbreakable, solid
   - `cutout_window` - breakable, passthrough
   - `cutout_void` - unbreakable, passthrough
-- Clear Sky builtin texturepack (with FAPI):
+- Clear Sky builtin texturepack:
   - Enables transparent sky rendering by modifying the sky shader and removing fog.
 
 ## Version Support
