@@ -2,6 +2,7 @@ package net.nml.windowtoreality.client;
 
 import org.jspecify.annotations.Nullable;
 
+import com.mojang.blaze3d.PrimitiveTopology;
 import com.mojang.blaze3d.pipeline.DepthStencilState;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
@@ -22,14 +23,28 @@ import net.nml.windowtoreality.WindowToReality;
 
 public class ClientRegistry {
 	public static final RenderType cutoutRenderType = RenderType.create("window_to_reality_cutout", RenderSetup.builder(RenderPipelines.register(
-		RenderPipeline.builder(RenderPipelines.MATRICES_FOG_SNIPPET)
-			.withVertexFormat(DefaultVertexFormat.POSITION, VertexFormat.Mode.QUADS)
+		compatBuilder()
 			.withVertexShader(WindowToReality.of("cutout"))
 			.withFragmentShader(WindowToReality.of("cutout"))
 			.withDepthStencilState(DepthStencilState.DEFAULT)
 			.withLocation(WindowToReality.of("cutout"))
 			.build()
 		)).createRenderSetup());
+
+	private static RenderPipeline.Builder compatBuilder() {
+		RenderPipeline.Builder builder = RenderPipeline.builder(RenderPipelines.MATRICES_FOG_SNIPPET);
+		try {
+			/* 26.1 */
+			Class<?> mode = Class.forName("com.mojang.blaze3d.vertex.VertexFormat$Mode");
+			builder.getClass().getMethod("withVertexFormat", VertexFormat.class, mode).invoke(builder, DefaultVertexFormat.POSITION, mode.getField("QUADS").get(null));
+		} catch (Throwable e) {
+			/* 26.2 */
+			builder
+				.withVertexBinding(0, DefaultVertexFormat.POSITION)
+				.withPrimitiveTopology(PrimitiveTopology.QUADS);
+		}
+		return builder;
+	}
 	
 	protected static void init() {
 		FabricLoader.getInstance().getModContainer(WindowToReality.MOD_ID).ifPresent(modContainer -> {

@@ -17,9 +17,8 @@ Technically Fabric API is optional, but there are still bugs so I wouldn't recom
 
 ## Version Support
 
-- A base implementation exists for all supported Minecraft versions.
 - Active updates are primarily done for the latest version.
-- Older versions may receive updates if requested or contributed through community pull requests.
+- Older versions may receive releases and updates if requested or contributed through community pull requests.
 
 No additional content features are currently planned. NeoForge support not planned.
 

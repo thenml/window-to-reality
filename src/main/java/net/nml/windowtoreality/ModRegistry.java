@@ -13,6 +13,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -35,8 +36,7 @@ public class ModRegistry {
 			.strength(1.5F, 6.0F)
 			.mapColor(MapColor.NONE)
 			.noOcclusion()
-			.isViewBlocking((a, b, c) -> true)
-			.isValidSpawn((a, b, c, d) -> false)
+			.isValidSpawn(Blocks::never)
 			.noTerrainParticles()
 			.pushReaction(PushReaction.BLOCK);
 	}

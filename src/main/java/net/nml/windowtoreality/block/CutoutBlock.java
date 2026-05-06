@@ -10,9 +10,6 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class CutoutBlock extends BaseEntityBlock {
 	public CutoutBlock(Properties properties) {
@@ -37,11 +34,6 @@ public class CutoutBlock extends BaseEntityBlock {
 	@Override
 	protected boolean propagatesSkylightDown(final BlockState state) {
 		return true;
-	}
-
-	@Override
-	protected VoxelShape getVisualShape(final BlockState state, final BlockGetter level, final BlockPos pos, final CollisionContext context) {
-		return Shapes.empty();
 	}
 
 	@Override

@@ -30,5 +30,11 @@ public class ModBlockTagProvider extends FabricTagsProvider.BlockTagsProvider {
 			.add(key(ModRegistry.cutoutBarrier))
 			.add(key(ModRegistry.cutoutWindow))
 			.add(key(ModRegistry.cutoutVoid));
+		builder(BlockTags.DRAGON_IMMUNE)
+			.add(key(ModRegistry.cutoutBarrier))
+			.add(key(ModRegistry.cutoutVoid));
+		builder(BlockTags.WITHER_IMMUNE)
+			.add(key(ModRegistry.cutoutBarrier))
+			.add(key(ModRegistry.cutoutVoid));
 	}
 }

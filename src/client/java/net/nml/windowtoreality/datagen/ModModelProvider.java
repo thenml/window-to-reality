@@ -14,6 +14,10 @@ public class ModModelProvider extends FabricModelProvider {
 
 	@Override
 	public void generateBlockStateModels(BlockModelGenerators bsmg) {
+		bsmg.createAirLikeBlock(ModRegistry.cutoutBlock, ModRegistry.cutoutBlock.asItem());
+		bsmg.createAirLikeBlock(ModRegistry.cutoutBarrier, ModRegistry.cutoutBarrier.asItem());
+		bsmg.createAirLikeBlock(ModRegistry.cutoutWindow, ModRegistry.cutoutWindow.asItem());
+		bsmg.createAirLikeBlock(ModRegistry.cutoutVoid, ModRegistry.cutoutVoid.asItem());
 	}
 
 	@Override
