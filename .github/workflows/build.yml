@@ -1,35 +1,59 @@
 name: build
-on: [pull_request, push]
+
+on:
+    release:
+        types:
+            - published
+    push:
+        branches:
+            - "**"
+        tags-ignore:
+            - "**"
+    pull_request:
+    workflow_dispatch:
+
+permissions:
+    id-token: write
+    attestations: write
+    contents: write
 
 jobs:
     build:
-        runs-on: ubuntu-24.04
+        runs-on: ubuntu-latest
         steps:
-            - name: checkout repository
+            - name: Checkout
               uses: actions/checkout@v6
-            - name: validate gradle wrapper
-              uses: gradle/actions/wrapper-validation@v6
-            - name: setup jdk
+
+            - name: JDK Setup
               uses: actions/setup-java@v5
               with:
-                  java-version: "25"
-                  distribution: "microsoft"
-            - name: make gradle wrapper executable
-              run: chmod +x ./gradlew
-            - name: build
-              run: ./gradlew build
-            - name: attest build provenance
-              uses: actions/attest-build-provenance@v2
+                  java-version: 25
+                  distribution: "temurin"
+
+            - name: Gradle Setup
+              uses: gradle/actions/setup-gradle@v5
               with:
-                  subject-path: "build/libs/*.jar, !build/libs/*-sources.jar"
-            - name: artifacts
-              uses: actions/upload-artifact@v4
+                  validate-wrappers: true
+
+            - name: Enable gradlew execution
+              run: chmod +x ./gradlew
+
+            - name: Gradle Build
+              run: ./gradlew build
+
+            - name: Attest Build Provenance
+              if: github.event_name != 'pull_request'
+              uses: actions/attest@v4
+              with:
+                  subject-path: "build/libs/*.jar"
+
+            - name: Upload Artifacts
+              uses: actions/upload-artifact@v7
               with:
                   name: Artifacts
-                  path: |
-                      build/libs/*.jar
-                      !build/libs/*-sources.jar
-            - name: publish
+                  path: build/libs/*.jar
+
+            - name: Publish
               uses: Kir-Antipov/mc-publish@v3.3
               with:
                   modrinth-id: xW3OImaS
