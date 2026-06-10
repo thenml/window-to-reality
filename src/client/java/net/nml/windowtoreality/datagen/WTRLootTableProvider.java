@@ -5,16 +5,16 @@ import java.util.concurrent.CompletableFuture;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.minecraft.core.HolderLookup;
-import net.nml.windowtoreality.ModRegistry;
+import net.nml.windowtoreality.WTRRegistry;
 
-public class ModLootTableProvider extends FabricBlockLootSubProvider {
-	protected ModLootTableProvider(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+public class WTRLootTableProvider extends FabricBlockLootSubProvider {
+	protected WTRLootTableProvider(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
 		super(dataOutput, registryLookup);
 	}
 
 	@Override
 	public void generate() {
-		dropSelf(ModRegistry.cutoutBlock);
-		dropSelf(ModRegistry.cutoutWindow);
+		dropSelf(WTRRegistry.cutoutBlock);
+		dropSelf(WTRRegistry.cutoutWindow);
 	}
 }

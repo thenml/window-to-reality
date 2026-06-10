@@ -23,7 +23,7 @@ import net.nml.windowtoreality.block.CutoutBlock;
 import net.nml.windowtoreality.block.CutoutBlockEntity;
 
 @SuppressWarnings("null")
-public class ModRegistry {
+public class WTRRegistry {
 	public static final Block cutoutBlock = block("cutout_block", CutoutBlock::new, cutoutProperties());
 	public static final Block cutoutBarrier = block("cutout_barrier", CutoutBlock::new, cutoutProperties().strength(-1.0F, 3600000.8F));
 	public static final Block cutoutWindow = block("cutout_window", CutoutBlock::new, cutoutProperties().noCollision());

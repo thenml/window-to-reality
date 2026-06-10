@@ -9,10 +9,10 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.Items;
-import net.nml.windowtoreality.ModRegistry;
+import net.nml.windowtoreality.WTRRegistry;
 
-public class ModRecipeProvider extends FabricRecipeProvider {
-	protected ModRecipeProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+public class WTRRecipeProvider extends FabricRecipeProvider {
+	protected WTRRecipeProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, registriesFuture);
 	}
 
@@ -21,7 +21,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 		return new RecipeProvider(registryLookup, output) {
 			@Override
 			public void buildRecipes() {
-				shaped(RecipeCategory.DECORATIONS, ModRegistry.cutoutBlock, 4)
+				shaped(RecipeCategory.DECORATIONS, WTRRegistry.cutoutBlock, 4)
 					.pattern(" X ")
 					.pattern("XOX")
 					.pattern(" X ")
@@ -29,7 +29,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 					.define('O', Items.ENDER_EYE)
 					.unlockedBy(getHasName(Items.GLASS), has(Items.GLASS))
 					.save(output);
-				shaped(RecipeCategory.DECORATIONS, ModRegistry.cutoutWindow, 4)
+				shaped(RecipeCategory.DECORATIONS, WTRRegistry.cutoutWindow, 4)
 					.pattern("YXY")
 					.pattern("XOX")
 					.pattern("YXY")

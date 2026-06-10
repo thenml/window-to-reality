@@ -18,7 +18,6 @@ import net.minecraft.util.ARGB;
 public abstract class ScreenshotMixin {
     @Unique
     private static int alpha = 0;
-    // private static final ThreadLocal<Integer> alpha = ThreadLocal.withInitial(() -> 0);
 
 	@ModifyConstant(method = "lambda$takeScreenshot$1", constant = @Constant(intValue = 0xff000000))
 	private static int allowAlpha(int original) {

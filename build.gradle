@@ -50,7 +50,7 @@ afterEvaluate {
 	loom.runs.configureEach {
 		vmArgs(
 			"-Xmx4G",
-			"-XX:+AllowEnhancedClassRedefinition",
+			// "-XX:+AllowEnhancedClassRedefinition",
 			"-XX:ReservedCodeCacheSize=1G",
 			"-javaagent:${ configurations.compileClasspath.find { it.name.contains("sponge-mixin") } }",
 			"-DMC_DEBUG_ENABLED",

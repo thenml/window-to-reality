@@ -1,9 +1,0 @@
-{
-	"pack": {
-		"description": {
-			"translate": "resourcePack.window-to-reality.clear_sky.description"
-		},
-		"min_format": 84,
-		"max_format": 1000
-	}
-}

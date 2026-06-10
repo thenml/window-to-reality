@@ -1,8 +1,8 @@
 # window-to-reality
 
-Simple mod to modify the Minecraft window to allow transparency. Made for video creators and map makers.
+Simple mod to modify the Minecraft window to allow transparency. Made for video creators and map makers for when a chromakey is not enough.
 
-Technically Fabric API is optional, but there are still bugs so I wouldn't recommend removing it yet.
+Fabric API is optional.
 
 ## Features
 
@@ -12,17 +12,16 @@ Technically Fabric API is optional, but there are still bugs so I wouldn't recom
   - `cutout_barrier` - unbreakable, solid
   - `cutout_window` - breakable, passthrough
   - `cutout_void` - unbreakable, passthrough
-- Clear Sky builtin texturepack:
-  - Enables transparent sky rendering by modifying the sky shader and removing fog.
 
 ## Version Support
 
-- Active updates are primarily done for the latest version.
+- Active updates are primarily done for the latest version and latest x.1.y
 - Older versions may receive releases and updates if requested or contributed through community pull requests.
 
 No additional content features are currently planned. NeoForge support not planned.
 
 ## Compatibility
 
+- Tested and works on: Windows, Linux Wayland (XWayland doesn't work - use `-DMC_DEBUG_ENABLED -DMC_DEBUG_PREFER_WAYLAND` JVM args)
 - No guarantee that mod custom screenshotting or rendering will work.
-- Any texturepacks that modify `core/terrain.fsh` and `post/transparency.fsh` should apply the same fixes, otherwise transparency will break.
+- Transparency supported with Improved Transparency setting on

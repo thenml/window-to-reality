@@ -9,10 +9,10 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
-import net.nml.windowtoreality.ModRegistry;
+import net.nml.windowtoreality.WTRRegistry;
 
-public class ModBlockTagProvider extends FabricTagsProvider.BlockTagsProvider {
-	protected ModBlockTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+public class WTRBlockTagProvider extends FabricTagsProvider.BlockTagsProvider {
+	protected WTRBlockTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, registriesFuture);
 	}
 
@@ -23,18 +23,18 @@ public class ModBlockTagProvider extends FabricTagsProvider.BlockTagsProvider {
 	@Override
 	protected void addTags(HolderLookup.Provider wrapperLookup) {
 		builder(BlockTags.MINEABLE_WITH_PICKAXE)
-			.add(key(ModRegistry.cutoutBlock))
-			.add(key(ModRegistry.cutoutWindow));
-		builder(ModRegistry.cutoutBlocksTag)
-			.add(key(ModRegistry.cutoutBlock))
-			.add(key(ModRegistry.cutoutBarrier))
-			.add(key(ModRegistry.cutoutWindow))
-			.add(key(ModRegistry.cutoutVoid));
+			.add(key(WTRRegistry.cutoutBlock))
+			.add(key(WTRRegistry.cutoutWindow));
+		builder(WTRRegistry.cutoutBlocksTag)
+			.add(key(WTRRegistry.cutoutBlock))
+			.add(key(WTRRegistry.cutoutBarrier))
+			.add(key(WTRRegistry.cutoutWindow))
+			.add(key(WTRRegistry.cutoutVoid));
 		builder(BlockTags.DRAGON_IMMUNE)
-			.add(key(ModRegistry.cutoutBarrier))
-			.add(key(ModRegistry.cutoutVoid));
+			.add(key(WTRRegistry.cutoutBarrier))
+			.add(key(WTRRegistry.cutoutVoid));
 		builder(BlockTags.WITHER_IMMUNE)
-			.add(key(ModRegistry.cutoutBarrier))
-			.add(key(ModRegistry.cutoutVoid));
+			.add(key(WTRRegistry.cutoutBarrier))
+			.add(key(WTRRegistry.cutoutVoid));
 	}
 }

@@ -6,8 +6,8 @@
 		"WindowMixin",
 		"VulkanGpuSurfaceMixin",
 		"LevelRendererMixin",
-		"FogRendererMixin",
-		"ScreenshotMixin"
+		"ScreenshotMixin",
+		"LevelTargetBundleMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
