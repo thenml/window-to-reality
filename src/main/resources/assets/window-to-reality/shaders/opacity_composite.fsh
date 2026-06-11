@@ -14,7 +14,7 @@ void main() {
     float opacityDepth = texture(OpacityDepthSampler, texCoord).r;
 
     float a = 1.0;
-    if (opacityDepth >= mainDepth) {
+    if (opacityDepth <= mainDepth) {
     	a = 1.0 - texture(OpacitySampler, texCoord).a;
     }
 

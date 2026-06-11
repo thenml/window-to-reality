@@ -1,10 +1,10 @@
 package net.nml.windowtoreality.client;
 
-import com.mojang.blaze3d.PrimitiveTopology;
 import com.mojang.blaze3d.pipeline.DepthStencilState;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.pipeline.RenderPipeline.Snippet;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
 
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
@@ -13,8 +13,7 @@ import net.nml.windowtoreality.WindowToReality;
 
 public class WTRClientRegistry {
 	public static final Snippet cutoutSnippet = RenderPipeline.builder(RenderPipelines.MATRICES_FOG_SNIPPET)
-		.withVertexBinding(0, DefaultVertexFormat.POSITION)
-		.withPrimitiveTopology(PrimitiveTopology.QUADS)
+		.withVertexFormat(DefaultVertexFormat.POSITION, VertexFormat.Mode.QUADS)
 		.withVertexShader(WindowToReality.of("cutout"))
 		.withFragmentShader(WindowToReality.of("cutout"))
 		.withDepthStencilState(DepthStencilState.DEFAULT)

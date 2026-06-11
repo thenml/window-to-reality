@@ -20,12 +20,12 @@ import com.mojang.blaze3d.resource.GraphicsResourceAllocator;
 import com.mojang.blaze3d.resource.RenderTargetDescriptor;
 
 import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.LevelTargetBundle;
 import net.minecraft.client.renderer.PostChain;
-import net.minecraft.client.renderer.ShaderManager;
 import net.minecraft.client.renderer.chunk.ChunkSectionsToRender;
-import net.minecraft.client.renderer.feature.FeatureRenderDispatcher;
+import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.state.level.LevelRenderState;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -36,7 +36,7 @@ import net.nml.windowtoreality.client.util.LevelTargetBundleI;
 @Mixin(LevelRenderer.class)
 public abstract class LevelRendererMixin implements LevelRendererI {
 	@Shadow @Final private LevelTargetBundle targets;
-	@Shadow @Final private ShaderManager shaderManager;
+	@Shadow @Final private Minecraft minecraft;
 
 
 	@Override @Nullable @Unique
@@ -46,31 +46,31 @@ public abstract class LevelRendererMixin implements LevelRendererI {
 	}
 
 
-	@Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;getTransparencyChain()Lnet/minecraft/client/renderer/PostChain;", shift = At.Shift.AFTER))
+	@Inject(method = "renderLevel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;getTransparencyChain()Lnet/minecraft/client/renderer/PostChain;", shift = At.Shift.AFTER))
 	private void render$setupRenderTarget(
-		final GraphicsResourceAllocator resourceAllocator, final DeltaTracker deltaTracker, final boolean renderOutline, final CameraRenderState cameraState, final Matrix4fc modelViewMatrix, final GpuBufferSlice terrainFog, final Vector4f fogColor, final boolean shouldRenderSky,
+		final GraphicsResourceAllocator resourceAllocator, final DeltaTracker deltaTracker, final boolean renderOutline, final CameraRenderState cameraState, final Matrix4fc modelViewMatrix, final GpuBufferSlice terrainFog, final Vector4f fogColor, final boolean shouldRenderSky, final ChunkSectionsToRender chunkSectionsToRender,
 		CallbackInfo ci, @Local FrameGraphBuilder frame, @Local RenderTargetDescriptor screenSizeTargetDescriptor
 	){
 		((LevelTargetBundleI)this.targets).windowOpacity(frame.createInternal("wtr_window_opacity", screenSizeTargetDescriptor));
 	}
 
 
-	@Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;addAlwaysOnTopPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher$PreparedFrame;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V", shift = At.Shift.AFTER))
+	@Inject(method = "renderLevel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;addLateDebugPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/renderer/state/level/CameraRenderState;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lorg/joml/Matrix4fc;)V", shift = At.Shift.AFTER))
 	private void render$applyOpacity(
-		final GraphicsResourceAllocator resourceAllocator, final DeltaTracker deltaTracker, final boolean renderOutline, final CameraRenderState cameraState, final Matrix4fc modelViewMatrix, final GpuBufferSlice terrainFog, final Vector4f fogColor, final boolean shouldRenderSky,
+		final GraphicsResourceAllocator resourceAllocator, final DeltaTracker deltaTracker, final boolean renderOutline, final CameraRenderState cameraState, final Matrix4fc modelViewMatrix, final GpuBufferSlice terrainFog, final Vector4f fogColor, final boolean shouldRenderSky, final ChunkSectionsToRender chunkSectionsToRender,
 		CallbackInfo ci, @Local FrameGraphBuilder frame, @Local(ordinal = 0) int screenWidth, @Local(ordinal = 1) int screenHeight
 	){
-		PostChain postChain = this.shaderManager.getPostChain(WindowToRealityClient.WINDOW_OPACITY_POST_CHAIN_ID, WindowToRealityClient.WINDOW_TARGETS);
+		PostChain postChain = this.minecraft.getShaderManager().getPostChain(WindowToRealityClient.WINDOW_OPACITY_POST_CHAIN_ID, WindowToRealityClient.WINDOW_TARGETS);
 		if (postChain != null) {
 			postChain.addToFrame(frame, screenWidth, screenHeight, this.targets);
 		}
 	}
 
-	
+
 	@SuppressWarnings("null")
 	@Inject(method = "addMainPass", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/framegraph/FramePass;executes(Ljava/lang/Runnable;)V"))
 	private void addMainPass(
-		final FrameGraphBuilder frame, final FeatureRenderDispatcher.PreparedFrame featureFrame, final GpuBufferSlice terrainFog, final LevelRenderState levelRenderState, final ProfilerFiller profiler, final ChunkSectionsToRender chunkSectionsToRender,
+      	final FrameGraphBuilder frame, final Frustum frustum, final Matrix4fc modelViewMatrix, final GpuBufferSlice terrainFog, final boolean renderOutline, final LevelRenderState levelRenderState, final DeltaTracker deltaTracker, final ProfilerFiller profiler, final ChunkSectionsToRender chunkSectionsToRender,
 		CallbackInfo ci, @Local FramePass pass
 	) {
 		if (((LevelTargetBundleI)this.targets).windowOpacity() != null) {
